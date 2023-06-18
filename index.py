@@ -22,25 +22,18 @@ def execute_script():
 script_thread = threading.Thread(target=execute_script)
 
 # Start the thread
-# script_thread.start()
-# print("Script execution completed.")
+# path=file_path
+script_thread.start()
+print("Script execution completed.")
 file_path = 'driver' 
-# Specify the correct file path
-# print(file_path)
-
-# webdriver.Chrome(ChromeDriverManager(path=file_path).install())
-# Open a URL in the Chrome browser
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:8989")
 driver_service = webdriver.chrome.service.Service(ChromeDriverManager(path=file_path).install())
-
-# Set the path to the Chrome executable
 chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
-
-# Create a WebDriver instance by passing the Service object and options
-driver = webdriver.Chrome(service=driver_service, options=chrome_options)
-# driver = webdriver.Chrome(executable_path='driver\\.wdm\\drivers\\chromedriver\\win32\\114.0.5735.90\\chromedriver.exe',options=chrome_options)
+chrome_options.add_argument('--remote-debugging-port=8989')
+chrome_options.add_experimental_option("debuggerAddress", "localhost:8989")
+# chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
+# chrome_options.binary_location = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
+# driver = webdriver.Chrome(service=driver_service, options=chrome_options)
+driver = webdriver.Chrome(executable_path='driver\\.wdm\\drivers\\chromedriver\\win32\\114.0.5735.90\\chromedriver.exe',options=chrome_options)
 print('came here')
 
 url = 'https://www.youtube.com/@blazingbane5565/live'
@@ -51,14 +44,9 @@ meta_element = driver.find_element_by_xpath(xpath_expression)
 content = meta_element.get_attribute("content")
 driver.switch_to.frame(driver.find_element_by_xpath("//iframe[@id='chatframe']"))
 xpath="shiva"
-
 xpath_expression = '//span[@id="author-name"]'
 span_element = driver.find_element_by_xpath(xpath_expression)
-
-# Get the text content of the span element
 text_content = span_element.text
-
-# Print the text content
 print(text_content)
 try:
     if driver.find_element_by_css_selector('#input-panel #container [aria-label="Chat publicly as '+BotName+'..."]').is_displayed():
@@ -73,9 +61,6 @@ try:
 except Exception as e:
     print("not say something xpath")
 print(xpath)
-# xpath="#input-panel #container [aria-label='Chat publicly as '+BotName+'...']"
-# xpath="#input-panel #container [aria-label='Say something... (slow mode is on)']"
-# xpath="#input-panel #container [aria-label='Say something...']" 
 def reply(data):
   print("funtion called with data - "+ data)
   driver.find_element_by_css_selector(xpath).clear()
@@ -97,28 +82,3 @@ def printit():
   print(spam)
   reply(spam)
 printit()
-
-while chat.is_alive():
-     for c in chat.get().sync_items():
-         try:
-            chan = c.author.name
-            msg = c.message.lower()
-            print(msg)
-            if(chan !=BotName):
-             if(msg.startswith("fun ") or (" bor ") in msg or (" fun ") in msg or (" kills ") in msg):
-                 try:
-                    responce = [" Fun is subjective ", " when ever u kill a person remember that there is a human behind the charector ", " you have fun? ", " yes yes good play "]
-                    data = chan +" "+ responce[randrange(0, len(responce))]
-                    print("fun is triggered")
-                    reply(data)
-                 except:
-                     print(" op deggara error ")
-             if(msg.startswith("op ") or (" op ") in msg or (" nt") in msg or msg.startswith("nicetry") or ("nice try") in msg or (" nt ") in msg   ):
-                 try:
-                    responce = ["that was cool isnt it", " its natural he is a pro  ", " well that was intense,isnt it?", " yes yes good play "]
-                    data = chan +" "+ responce[randrange(0, len(responce))]
-                    reply(data)
-                 except:
-                     print(" op deggara error ")
-         except Exception as e:
-            print(e)
