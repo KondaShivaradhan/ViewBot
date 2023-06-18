@@ -22,17 +22,25 @@ def execute_script():
 script_thread = threading.Thread(target=execute_script)
 
 # Start the thread
-script_thread.start()
-print("Script execution completed.")
+# script_thread.start()
+# print("Script execution completed.")
 file_path = 'driver' 
 # Specify the correct file path
-print(file_path)
+# print(file_path)
 
-webdriver.Chrome(ChromeDriverManager(path=file_path).install())
+# webdriver.Chrome(ChromeDriverManager(path=file_path).install())
 # Open a URL in the Chrome browser
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:8989")
-driver = webdriver.Chrome(executable_path='driver\\.wdm\\drivers\\chromedriver\\win32\\114.0.5735.90\\chromedriver.exe',options=chrome_options)
+driver_service = webdriver.chrome.service.Service(ChromeDriverManager(path=file_path).install())
+
+# Set the path to the Chrome executable
+chrome_options = webdriver.ChromeOptions()
+chrome_options.binary_location = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
+
+# Create a WebDriver instance by passing the Service object and options
+driver = webdriver.Chrome(service=driver_service, options=chrome_options)
+# driver = webdriver.Chrome(executable_path='driver\\.wdm\\drivers\\chromedriver\\win32\\114.0.5735.90\\chromedriver.exe',options=chrome_options)
 print('came here')
 
 url = 'https://www.youtube.com/@blazingbane5565/live'
