@@ -32,8 +32,8 @@ chrome_options.add_argument('--remote-debugging-port=8989')
 chrome_options.add_experimental_option("debuggerAddress", "localhost:8989")
 # chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
 # chrome_options.binary_location = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
-# driver = webdriver.Chrome(service=driver_service, options=chrome_options)
-driver = webdriver.Chrome(executable_path='driver\\.wdm\\drivers\\chromedriver\\win32\\114.0.5735.90\\chromedriver.exe',options=chrome_options)
+driver = webdriver.Chrome(service=driver_service, options=chrome_options)
+# driver = webdriver.Chrome(executable_path='driver\\.wdm\\drivers\\chromedriver\\win32\\114.0.5735.90\\chromedriver.exe',options=chrome_options)
 print('came here')
 
 url = 'https://www.youtube.com/@blazingbane5565/live'
