@@ -32,8 +32,9 @@ webdriver.Chrome(ChromeDriverManager(path=file_path).install())
 # Open a URL in the Chrome browser
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:8989")
-print('came here')
 driver = webdriver.Chrome(executable_path='driver\\.wdm\\drivers\\chromedriver\\win32\\114.0.5735.90\\chromedriver.exe',options=chrome_options)
+print('came here')
+
 url = 'https://www.youtube.com/@blazingbane5565/live'
 driver.get(url)
 driver.implicitly_wait(10)
