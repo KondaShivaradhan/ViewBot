@@ -72,9 +72,6 @@ def reply(data):
   driver.find_element_by_css_selector(xpath).clear()
   driver.find_element_by_css_selector(xpath).send_keys(data)
   driver.find_element_by_css_selector(xpath).send_keys(Keys.RETURN)
-def random():
-    out= requests.get("https://v2.jokeapi.dev/joke/Miscellaneous,Dark,Pun,Spooky,Christmas?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single").json()
-    return out['joke']
 print(content)
 index = content.index('v=')
 vid = content[32:]
@@ -107,7 +104,7 @@ while chat.is_alive():
                     reply(data)
                  except:
                      print(" op deggara error ")
-             if(msg.startswith(" op ") or (" op ") in msg or (" nt ") in msg or msg.startswith("nicetry") or ("nice try") in msg or (" nt ") in msg   ):
+             if(msg.startswith("op ") or (" op ") in msg or (" nt") in msg or msg.startswith("nicetry") or ("nice try") in msg or (" nt ") in msg   ):
                  try:
                     responce = ["that was cool isnt it", " its natural he is a pro  ", " well that was intense,isnt it?", " yes yes good play "]
                     data = chan +" "+ responce[randrange(0, len(responce))]
