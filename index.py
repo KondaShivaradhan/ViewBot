@@ -18,10 +18,8 @@ from random import randrange
 def execute_script():
     os.system('chrome.bat')
 
-# Create a new thread
 script_thread = threading.Thread(target=execute_script)
 
-# Start the thread
 # path=file_path
 script_thread.start()
 print("Script execution completed.")
@@ -30,10 +28,7 @@ driver_service = webdriver.chrome.service.Service(ChromeDriverManager(path=file_
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--remote-debugging-port=8989')
 chrome_options.add_experimental_option("debuggerAddress", "localhost:8989")
-# chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
-# chrome_options.binary_location = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
 driver = webdriver.Chrome(service=driver_service, options=chrome_options)
-# driver = webdriver.Chrome(executable_path='driver\\.wdm\\drivers\\chromedriver\\win32\\114.0.5735.90\\chromedriver.exe',options=chrome_options)
 print('came here')
 
 url = 'https://www.youtube.com/@blazingbane5565/live'
@@ -45,6 +40,7 @@ content = meta_element.get_attribute("content")
 driver.switch_to.frame(driver.find_element_by_xpath("//iframe[@id='chatframe']"))
 xpath="shiva"
 xpath_expression = '//span[@id="author-name"]'
+
 span_element = driver.find_element_by_xpath(xpath_expression)
 text_content = span_element.text
 print(text_content)
@@ -77,8 +73,31 @@ def printit():
   url = 'https://raw.githubusercontent.com/KondaShivaradhan/cloud/main/responce.json'
   resp = requests.get(url)
   data = json.loads(resp.text)
-#   print(data['random'])
   spam = data['random'][randrange(0, len(data['random']))]
   print(spam)
   reply(spam)
 printit()
+while chat.is_alive():
+     for c in chat.get().sync_items():
+         try:
+            chan = c.author.name
+            msg = c.message.lower()
+            print(msg)
+            if(chan !=BotName):
+             if(msg.startswith("fun ") or (" bor ") in msg or (" fun ") in msg or (" kills ") in msg):
+                 try:
+                    responce = [" Fun is subjective ", " when ever u kill a person remember that there is a human behind the charector ", " you have fun? ", " yes yes good play "]
+                    data = chan +" "+ responce[randrange(0, len(responce))]
+                    print("fun is triggered")
+                    reply(data)
+                 except:
+                     print(" op deggara error ")
+             if(msg.startswith("op ") or (" op ") in msg or (" nt") in msg or msg.startswith("nicetry") or ("nice try") in msg or (" nt ") in msg   ):
+                 try:
+                    responce = ["that was cool isnt it", " its natural he is a pro  ", " well that was intense,isnt it?", " yes yes good play "]
+                    data = chan +" "+ responce[randrange(0, len(responce))]
+                    reply(data)
+                 except:
+                     print(" op deggara error ")
+         except Exception as e:
+            print(e)
